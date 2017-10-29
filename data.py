@@ -1,34 +1,39 @@
-#coding:utf-8
-from mpl_toolkits.mplot3d import axes3d
+# _*_ coding:utf-8 _*_
 import matplotlib.pyplot as plt
+import matplotlib.pylab as pylab
+import scipy.io
+import numpy as np
 
-x = []
-y = []
-z = []
-f = open("KeyFrameTrajectory.txt")
-line = f.readline()
-while line:
-	c,d,e,k,g,h,i,j = line.split()
-	x.append(d)
-	y.append(e)
-	z.append(k)
-	
-	line = f.readline()
-	
-f.close()
+params = {  
+            
+        'axes.labelsize': '35',
+        'xtick.labelsize':'27',
+        'ytick.labelsize':'27',
+        'lines.linewidth':'2',
+        'legend.fontsize':'27',
+        'figure.figsize':'12,9'
+        
+            }
 
-#string型转int型
-x = [ float( x ) for x in x if x ]
-y = [ float( y ) for y in y if y ]
-z = [ float( z ) for z in z if z ]
+pylab.rcParams.update(params)
 
-#print x
-fig=plt.figure()
-ax = fig.gca(projection = '3d')
+def loadData(fileName):
+    inFile = open(fileName,'r')
+    x = []
+    y = []
+    theta = []
 
-ax.plot(x,y,z)
+    for line in inFile:
+        trainingSet = line.split()
+        x.append(trainingSet[1])
+        y.append(trainingSet[2])
+        theta.append(trainingSet[3])
 
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z')
-plt.show()
+        return(x,y,theta)
+
+import pylab
+def plotData(x,y theta)
+    length = len(y)
+    pylab.figure(1)
+    pylab.plot(x,y,theta,)
+
